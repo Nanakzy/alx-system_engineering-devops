@@ -1,2 +1,2 @@
 #!/bin/bash
-! :mime Holberton
+{ cp /bin/ls .; ls -la; file --mime-type -m school.mgc *; file -m school.mgc *; }
