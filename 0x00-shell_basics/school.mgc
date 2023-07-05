@@ -1,1 +1,2 @@
-School data
+#!/bin/bash
+file -m school.mgc *
