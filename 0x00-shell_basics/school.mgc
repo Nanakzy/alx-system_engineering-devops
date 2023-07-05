@@ -1,2 +1,2 @@
 #!/bin/bash
-echo -e "0 string SCHOOL\n!:mime text/plain" > school.mgc
+echo -e "0 string SCHOOL\ttext/plain\n!:mime text/plain" > school.mgc
