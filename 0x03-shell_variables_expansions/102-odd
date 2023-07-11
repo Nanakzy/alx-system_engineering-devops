@@ -1,2 +1,2 @@
 #!/bin/bash
-echo "$1" | perl -lnE 'print if $. == 1'
+paste -d, - - | cut -d, -f1
