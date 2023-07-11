@@ -1,0 +1,2 @@
+#!/bin/bash
+result=$(echo "$BREATH ^ $LOVE" | bc)
