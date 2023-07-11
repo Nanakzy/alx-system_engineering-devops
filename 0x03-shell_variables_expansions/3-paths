@@ -1,2 +1,2 @@
 #!/bin/bash
-NUM_DIRS=$(echo "$PATH" | wc -l)
+echo $((echo $PATH | grep -i -o "!/" | wc -w + 1))
