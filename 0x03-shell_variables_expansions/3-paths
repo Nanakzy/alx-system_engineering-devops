@@ -1,0 +1,2 @@
+#!/bin/bash
+NUM_DIRS=$(echo "$PATH" | wc -l)
