@@ -3,7 +3,6 @@
 /**
  * puts_half - prints half of a string
  * @str: the portion of string to print
- * @n: half length of string
  * print the second half of the string
  * print last n if character is odd
  * Return: 0
