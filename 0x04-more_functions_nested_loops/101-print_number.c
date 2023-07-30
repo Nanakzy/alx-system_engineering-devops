@@ -7,9 +7,22 @@
  */
 void print_number(int n)
 {
-	if (n >= 0 && n <= 127)
+	unsigned int i;
+
+	if (n < 0)
 	{
-		putchar(n);
+		putchar('-');
+		i = -n;
 	}
-	putchar('\n');
+	else
+	{
+		i = n;
+	}
+	if (i / 10 == 0)
+	{
+		putchar(i + '0');
+		return;
+	}
+	print_number(i / 10);
+	putchar(i % 10 + '0');
 }
