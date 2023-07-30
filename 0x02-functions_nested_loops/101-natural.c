@@ -3,7 +3,7 @@
 
 /**
  * main - computes and prints sum of multiples of 3 and 5
- * Return: Sum
+ * Return: void
  */
 int main(void)
 {
