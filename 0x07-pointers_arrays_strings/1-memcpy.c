@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * _strchr - copies memory area
+ * _memcpy - copies memory area
  * @dest: output
  * @src: memory area pointer
  * @n: number of times
