@@ -7,7 +7,8 @@
  */
 int main(void)
 {
-	int fibonacci[50];
+
+	unsigned long long int fibonacci[50];
 	int i;
 
 	fibonacci[0] = 1;
@@ -19,9 +20,9 @@ int main(void)
 	}
 	for (i = 0; i < 49; i++)
 	{
-		printf("%d, ", fibonacci[i]);
+		printf("%llu, ", fibonacci[i]);
 	}
-	printf("%d\n", fibonacci[49]);
+	printf("%llu\n", fibonacci[49]);
 
 	return (0);
 }
