@@ -2,9 +2,9 @@
 #include <stdio.h>
 
 /**
- * print_times_table -  prints the n times table, starting zero
+ * print_times_table -  prints the n times table, starting from zero
  * @n: the integer value
- * Return: 0
+ * Return: void
  */
 void print_times_table(int n)
 {
@@ -20,22 +20,14 @@ void print_times_table(int n)
 
 				if (b == 0)
 				{
-					_putchar('0');
+					printf("%d", result);
 				}
 				else
 				{
-					_putchar(',');
-					_putchar(' ');
+					printf(", %3d", result);
 				}
-				if (result < 100)
-				{
-					_putchar(' ');
-				}
-				if (result < 10)
 			}
-			 _putchar(' ');
-			 {
-				 if (result >= 100)
-			 }
-			 _putchar((result / 100) + '0');
-			 _putchar
+			printf("\n");
+		}
+	}
+}
