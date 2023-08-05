@@ -1,10 +1,9 @@
 #include "main.h"
-#include <stdio.h>
+#include "0-putchar.c"
 /**
- * _puts - entry
- * @str: string
- *
- * Return: Always 0 (Success)
+ * _puts - prints a string, followed by a new line, to stdout
+ * @str: the string to be printed
+ * Return: the string length
  */
 void _puts(char *str)
 {
