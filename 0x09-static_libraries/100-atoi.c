@@ -16,7 +16,7 @@ int _atoi(char *s)
 	{
 		if (s[c] == '-')
 		{
-			min == -1;
+			min = -1;
 		}
 		while (s[c] >= '0' && s[c] <= '9')
 		{
