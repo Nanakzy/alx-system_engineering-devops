@@ -3,7 +3,7 @@
 
 #include "main.h"
 #include <stdio.h>
-#include <stdlib>
+#include <stdlib.h>
 
 int _putchar(char c);
 char *create_array(unsigned int size, char c);
