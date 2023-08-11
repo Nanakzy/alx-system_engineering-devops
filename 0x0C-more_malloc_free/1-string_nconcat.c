@@ -39,11 +39,10 @@ char *string_nconcat(char *s1, char *s2, unsigned int n)
 	{
 		if (c < a)
 			str[c] = s1[c];
-
-		if (c >= a)
+		else
 		{
-			str[c] = s2[b];
-			b++;
+			 str[c] = s2[b];
+			 b++;
 		}
 		c++;
 	}
