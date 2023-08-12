@@ -7,46 +7,43 @@
  * @s1: string one
  * @s2: string two
  * @n: the size
- * Return: concatenate string or NULL
+ * Return: concatenated string or NULL on failure
  */
 char *string_nconcat(char *s1, char *s2, unsigned int n)
 {
-	unsigned int a = 0, b = 0, c = 0, d = 0;
-	char *str;
+	unsigned int len1 = 0, len2 = 0, final_len = 0;
+	char *concatenated_str;
+	unsigned int i;
 
 	if (s1 == NULL)
-		s1 = " ";
+		s1 = "";
 	if (s2 == NULL)
-		s2 = " ";
+		s2 = "";
 
-	while (s1[a])
-		a++;
+	while (s1[len1])
+		len1++;
 
-	while (s2[b] && b < n)
-		b++;
+	while (s2[len2])
+		len2++;
 
-	if (n >= b)
-		d = a + b;
+	if (n >= len2)
+		final_len = len1 + len2;
 	else
-		d = a + n;
+		final_len = len1 + n;
 
-	str = malloc(sizeof(char) * (d + 1));
+	concatenated_str = malloc(final_len + 1);
 
-	if (str == NULL)
+	if (concatenated_str == NULL)
 		return (NULL);
 
-	b = 0;
-	while (c < d)
-	{
-		if (c < a)
-			str[c] = s1[c];
-		else
-		{
-			 str[c] = s2[b];
-			 b++;
-		}
-		c++;
-	}
-	str[c] = '\0';
-	return (str);
+
+	for (i = 0; i < len1; i++)
+		concatenated_str[i] = s1[i];
+
+	for (i = 0; i < n && s2[i]; i++)
+		concatenated_str[len1 + i] = s2[i];
+
+	concatenated_str[final_len] = '\0';
+
+	return (concatenated_str);
 }
