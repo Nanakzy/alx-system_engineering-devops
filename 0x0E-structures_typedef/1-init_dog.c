@@ -2,7 +2,7 @@
 #include "dog.h"
 
 /**
- * init dog - initializ type struct dog varaible
+ * init_dog - initializ type struct dog varaible
  * @d: pointer to struct dog
  * @name: name to init
  * @age: age to init
