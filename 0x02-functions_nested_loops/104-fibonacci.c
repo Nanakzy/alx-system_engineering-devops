@@ -14,12 +14,11 @@ void print_fibonacci_sequence(int n)
 	printf("%d, %d", a, b);
 
 	for (int count = 2; count < n; ++count)
-	{
+
 		c = a + b;
 		printf(", %d", c);
 		a = b;
 		b = c;
-	}
 }
 
 /**
