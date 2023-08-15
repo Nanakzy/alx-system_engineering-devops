@@ -9,7 +9,7 @@
 int main(void)
 {
 	int a = 1, b = 2, temp;
-	long long total_sum = 0;
+	int total_sum = 0;
 
 	while (a <= 4000000)
 	{
@@ -22,5 +22,7 @@ int main(void)
 		b = temp + b;
 	}
 
-	printf("%lld\n", total_sum);
+	printf("%d\n", total_sum);
+
+	return (0);
 }
