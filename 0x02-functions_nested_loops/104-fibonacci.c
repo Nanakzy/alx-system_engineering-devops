@@ -24,6 +24,7 @@ void print_fibonacci_sequence(int n)
 		b = c;
 		count++;
 	}
+	printf("\n");
 }
 
 /**
