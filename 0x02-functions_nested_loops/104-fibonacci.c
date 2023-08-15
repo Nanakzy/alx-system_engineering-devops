@@ -10,16 +10,19 @@
 void print_fibonacci_sequence(int n)
 {
 	int a = 1, b = 2, c;
+	int count;
 
 	printf("%d, %d", a, b);
 
-	for (int count = 2; count < n; ++count)
-	{
+	count = 2;
 
+	while (count < n)
+	{
 		c = a + b;
 		printf(", %d", c);
 		a = b;
 		b = c;
+		count++;
 	}
 }
 
