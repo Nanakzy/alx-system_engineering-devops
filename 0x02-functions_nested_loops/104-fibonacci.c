@@ -8,17 +8,17 @@
  */
 void print_fibonacci_sequence(int n)
 {
-	int a = 1, b = 2, c;
+	unsigned long int a = 1, b = 2, c;
 	int count;
 
-	printf("%d, %d", a, b);
+	printf("%lu, %lu", a, b);
 
 	count = 2;
 
 	while (count < n)
 	{
 		c = a + b;
-		printf(", %d", c);
+		printf(", %lu", c);
 		a = b;
 		b = c;
 		count++;
