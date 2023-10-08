@@ -4,13 +4,12 @@
 /**
  * print_binary - prints the binary representation of a number
  * @n: the number to be represented
- * Return: printed binary
  */
 void print_binary(unsigned long int n)
 {
-	int num_bits = sizeof(unsigned long int) * 8;
 	int i;
-	int leading_zero = 1;
+	int num_bits = sizeof(unsigned long int) * 8;
+	int printed = 0;
 
 	if (n == 0)
 	{
@@ -23,10 +22,14 @@ void print_binary(unsigned long int n)
 	{
 		unsigned long int mask = 1UL << i;
 
-		if ((n & mask) || !leading_zero)
+		if ((n & mask) >> i)
 		{
-			putchar((n & mask) ? '1' : '0');
-			leading_zero = 0;
+			putchar('1');
+			printed = 1;
+		}
+		else if (printed)
+		{
+			putchar('0');
 		}
 	}
 
