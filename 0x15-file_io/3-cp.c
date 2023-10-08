@@ -6,7 +6,7 @@
 
 #define BUFFER_SIZE 1024
 
-int copy_file(const char *file_from, const char *file_to);
+int copy_file(int fd_from, const char *file_to);
 
 /**
  * main - checks if number of arguments are correct
@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
 		exit(98);
 	}
 
-	result = copy_file(file_from, file_to);
+	result = copy_file(fd_from, file_to);
 
 
 	if (result == 99)
