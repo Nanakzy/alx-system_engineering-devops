@@ -84,5 +84,6 @@ int copy_file(int fd_from, const char *file_to)
 	}
 
 	close(fd_to);
+	close(fd_from);
 	return (0);
 }
