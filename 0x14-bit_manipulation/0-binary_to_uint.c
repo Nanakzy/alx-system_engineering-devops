@@ -1,4 +1,5 @@
 #include "main.h"
+#include <stddef.h>
 
 /**
  * binary_to_uint - converts a binary number to an unsigned int
@@ -20,10 +21,11 @@ unsigned int binary_to_uint(const char *b)
 		{
 			return (0);
 		}
+
 		result = (result << 1) | (*b - '0');
 		b++;
+
 		bit_convert++;
 	}
-
 	return (result);
 }
