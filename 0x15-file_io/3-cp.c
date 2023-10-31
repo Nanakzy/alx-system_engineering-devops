@@ -64,6 +64,10 @@ void copy_file(const char *source, const char *dest)
 	char buffer[BUFFER_SIZE];
 	int bytes_read, bytes_written;
 
+	mode_t old_umask = umask(0);
+
+	umask(old_umask);
+
 	while ((bytes_read = read(source_fd, buffer, BUFFER_SIZE)) > 0)
 	{
 		bytes_written = write(dest_fd, buffer, bytes_read);
