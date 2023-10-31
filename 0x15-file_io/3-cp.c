@@ -20,36 +20,49 @@ void error_message(int code, const char *format, ...)
 }
 
 /**
- * main - entry point
- * @argv: the vector
- * @argc: the number of arguments
- * Return: 0
+ * open_file - opens the fie
+ * @flags: the flag to use
+ * @filename: the name if the file
+ * @mode: the type of mode
+ * Return: opened file
  */
-int main(int argc, char *argv[])
+int open_file(const char *filename, int flags, int mode)
 {
-	const char *file_from = argv[1];
-	const char *file_to = argv[2];
-	int source_fd, dest_fd, bytes_read, bytes_written;
+	int fd = open(filename, flags, mode);
+
+	if (fd == -1)
+	{
+		error_message(99, "Error: Can't open file %s\n", filename);
+	}
+
+	return (fd);
+}
+
+/**
+ * close_file - closes the file
+ * @fd: the file descriptor
+ * Return: void
+ */
+void close_file(int fd)
+{
+	if (close(fd) == -1)
+	{
+		error_message(100, "Error: Can't close fd %d\n", fd);
+	}
+}
+
+/**
+ * copy_file - copies the file
+ * @source: the source file
+ * @dest: the destination file
+ * Return: dest
+ */
+void copy_file(const char *source, const char *dest)
+{
+	int source_fd = open_file(source, O_RDONLY, 0);
+	int dest_fd = open_file(dest, O_WRONLY | O_CREAT | O_TRUNC, 0664);
 	char buffer[BUFFER_SIZE];
-
-	if (argc != 3)
-	{
-		error_message(97, "Usage: cp file_from file_to\n");
-	}
-
-	source_fd = open(file_from, O_RDONLY);
-
-	if (source_fd == -1)
-	{
-		error_message(98, "Error: Can't read from file %s\n", file_from);
-	}
-
-	dest_fd = open(file_to, O_WRONLY | O_CREAT | O_TRUNC, 0664);
-
-	if (dest_fd == -1)
-	{
-		error_message(99, "Error: Can't write to file %s\n", file_to);
-	}
+	int bytes_read, bytes_written;
 
 	while ((bytes_read = read(source_fd, buffer, BUFFER_SIZE)) > 0)
 	{
@@ -57,25 +70,36 @@ int main(int argc, char *argv[])
 
 		if (bytes_written == -1)
 		{
-			error_message(99, "Error: Can't write to file %s\n", file_to);
+			error_message(99, "Error: Can't write to file %s\n", dest);
 		}
 	}
 
 	if (bytes_read == -1)
 	{
-		error_message(98, "Error: Can't read from file %s\n", file_from);
+		error_message(98, "Error: Can't read from file %s\n", source);
 	}
 
-	if (close(source_fd) == -1)
+	close_file(source_fd);
+	close_file(dest_fd);
+}
+
+/**
+ * main - entry point
+ * @argc: number of arguments
+ * @argv: the argument vector
+ * Return: 0
+ */
+int main(int argc, char *argv[])
+{
+	const char *file_from = argv[1];
+	const char *file_to = argv[2];
+
+	if (argc != 3)
 	{
-		error_message(100, "Error: Can't close fd %d\n", source_fd);
+		error_message(97, "Usage: cp file_from file_to\n");
 	}
 
-	if (close(dest_fd) == -1)
-	{
-		error_message(100, "Error: Can't close fd %d\n", dest_fd);
-	}
+	copy_file(file_from, file_to);
 
 	return (0);
 }
-
