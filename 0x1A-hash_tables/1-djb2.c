@@ -1,3 +1,8 @@
+/**
+ * hash_djb2 - implementing the djb2 algorithm.
+ * @str: the string pointer
+ * Return: result
+ */
 unsigned long int hash_djb2(const unsigned char *str)
 {
 	unsigned long int hash;
