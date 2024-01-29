@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+#  manages manage_my_process
+
+log_file="/tmp/my_process"
+
+while true; do
+    echo "I am alive!" >> "$log_file"
+    sleep 2
+done
