@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+#stops 4-to_infinity_and_beyond process.
+
+process_name="4-to_infinity_and_beyond"
+
+# Use pkill to stop the process
+pkill -f "$process_name"
