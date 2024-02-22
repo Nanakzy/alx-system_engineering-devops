@@ -1,2 +1,20 @@
-all: main.c school.c
-	gcc main.c school.c -o school
+# Makefile for building the 'school' executable
+
+# Rule to build the executable
+all: school
+
+# Rule to compile main.c
+main.o: main.c
+    gcc -c main.c -o main.o
+
+# Rule to compile school.c
+school.o: school.c
+    gcc -c school.c -o school.o
+
+# Rule to link the object files and create the executable
+school: main.o school.o
+    gcc main.o school.o -o school
+
+# Clean rule to remove object files and the executable
+clean:
+	rm -f school *.o
