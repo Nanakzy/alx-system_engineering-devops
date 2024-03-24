@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# SSH client configuration
+
+Host your_server_alias_or_IP
+    HostName 100.26.122.187
+    ubuntu
+    IdentityFile ~/.ssh/school
+    PreferredAuthentications publickey
+    PasswordAuthentication no
