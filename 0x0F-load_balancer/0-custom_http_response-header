@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# This script installs and configures Nginx server
+apt-get -y update
+apt-get -y install nginx
+echo "Holberton School" > /var/www/html/index.nginx-debian.html
+printf "Ceci n'est pas une page\n" > /usr/share/nginx/html/404.html
+sed -i "/server_name _;/ a\\\tadd_header X-Served-By $HOSTNAME;\n\trewrite ^/redirect_me http://www.youtube.com permanent;\n\terror_page 404 /404.html;\n\tlocation = /404.html {\n\t\troot /usr/share/nginx/html;\n\t\tinternal;\n\t}" /etc/nginx/sites-available/default
+service nginx restart
