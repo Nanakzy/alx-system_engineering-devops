@@ -1,17 +1,13 @@
-# 100-puppet_ssh_config.pp
+#!/usr/bin/env bash
+# using puppet to mkae changes to my configuration file
 
 file { '/etc/ssh/ssh_config':
   ensure => present,
-}
 
-file_line { 'Turn off password auth':
-  path  => '/etc/ssh/ssh_config',
-  line  => 'PasswordAuthentication no',
-  match => '^#?PasswordAuthentication',
-}
+content =>"
 
-file_line { 'Declare identity file':
-  path  => '/etc/ssh/ssh_config',
-  line  => 'IdentityFile ~/.ssh/school',
-  match => '^#?IdentityFile',
+        #SSH client configuration
+        host*
+        IdentityFile ~/.ssh/school
+        PasswordAuthentication no
 }
