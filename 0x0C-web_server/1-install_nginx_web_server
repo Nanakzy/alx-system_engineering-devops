@@ -5,4 +5,4 @@ apt-get -y install nginx
 fw allow 'Nginx HTTP'
 sed -i 's/.*listen\(.*\)80;/    listen 80;/g' /etc/nginx/sites-available/default
 echo "Hello World!" > /var/www/html/index.html
-service nginx start
+service nginx restart
