@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Installs nginx server
 sudo apt-get update
-sudo apt -y install nginx
+sudo apt-get -y install nginx
 sudo ufw 'Nginx HTTP'
 sed -i 's/.*listen\(.*\)80;/    listen 80;/g' /etc/nginx/sites-available/default
 
