@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+# Function to display DNS record information for a specific subdomain
+get_dns_info() {
+    sub_domain=$1
+    domain=$2
+    
+    # Use dig to get DNS information for the subdomain
+    dns_info=$(dig $sub_domain.$domain +short)
+
+    # If DNS information is not empty, display it
+    if [ -n "$dns_info" ]; then
+        echo "The subdomain $sub_domain is a $(dig $sub_domain.$domain | grep -o 'IN.*' | awk '{print $3}') record and points to $dns_info"
+    else
+        echo "No DNS record found for $sub_domain.$domain"
+    fi
+}
+
+# Function to display DNS record information for all subdomains
+get_all_dns_info() {
+    domain=$1
+
+    echo "Displaying DNS record information for subdomains of $domain:"
+    get_dns_info "www" $domain
+    get_dns_info "lb-01" $domain
+    get_dns_info "web-01" $domain
+    get_dns_info "web-02" $domain
+}
+
+# Main script
+if [ $# -eq 1 ]; then
+    get_all_dns_info $1
+elif [ $# -eq 2 ]; then
+    get_dns_info $2 $1
+else
+    echo "Usage: $0 <domain> [subdomain]"
+    exit 1
+fi
