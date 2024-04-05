@@ -14,7 +14,7 @@ sudo ufw allow 'Nginx HTTP'
 echo "Hello world!" | sudo tee /var/www/html/index.html
 
 # Configure custom HTTP response header
-custom_header_config="add_header X-Served-By \$hostname;"
+add_header X-Served-By $hostname;
 
 # Add custom header configuration to Nginx default site configuration
 sudo sed -i "/listen 80 default_server;/a $custom_header_config" /etc/nginx/sites-enabled/default
