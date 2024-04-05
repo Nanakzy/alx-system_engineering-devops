@@ -1,23 +1,12 @@
 #!/usr/bin/env bash
-# Configures an Nginx server to add a custom HTTP response header
+# Install nginx on web server; Nginx should be listening on port 80
+# redirects to another page
+# Have a custom 404 page
 
-# Update package repositories
-sudo apt-get -y update
-
-# Install Nginx
-sudo apt-get -y install nginx
-
-# Allow Nginx through the firewall
-sudo ufw allow 'Nginx HTTP'
-
-# Create index.html with a simple message
-echo "Hello world!" | sudo tee /var/www/html/index.html
-
-# Configure custom HTTP response header
-add_header X-Served-By $hostname;
-
-# Add custom header configuration to Nginx default site configuration
-sudo sed -i "/listen 80 default_server;/a $custom_header_config" /etc/nginx/sites-enabled/default
-
-# Restart Nginx to apply changes
-sudo service nginx restart
+apt-get -y update
+apt-get -y install nginx
+ufw allow 'Nginx HTTP'
+echo 'Hello world!' > /var/www/html/index.nginx-debian.html
+sed -i '/listen 80 default_server;/a rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;' /etc/nginx/sites-enabled/default
+sed -i '/listen 80 default_server;/a add_header X-Served-By $hostname;' /etc/nginx/sites-enabled/default
+service nginx start
