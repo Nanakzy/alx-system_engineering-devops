@@ -1,22 +1,21 @@
 #!/usr/bin/env bash
 
-# Install HAProxy
+# Install and configure HAProxy load balancer to 2135-lb-01
+# Sends traffic to web-01 and web-02
+
+CONFIG="\\\nlisten appname 0.0.0.0:80\n\tmode http\n\tbalance roundrobin\n\toption httpclose\n\toption forwardfor\n\tserver 403433-web-01 34.224.83.4:80 check\n\tserver 403433-web-02 54.89.108.197:80 check\n"
+
+# Update package repository
 sudo apt-get update
+
+# Install HAProxy
 sudo apt-get install -y haproxy
 
-# Configure HAProxy to send traffic to web-01 and web-02 using roundrobin algorithm
-sudo tee /etc/haproxy/haproxy.cfg > /dev/null <<EOT
-frontend http_front
-    bind *:80
-    stats uri /haproxy?stats
-    default_backend http_back
+# Enable HAProxy management via init script
+sudo sed -i "s/ENABLED=0/ENABLED=1/" /etc/default/haproxy
 
-backend http_back
-    balance roundrobin
-    server web-01 403433-web-01:80 check
-    server web-02 403433-web-02:80 check
-EOT
+# Append HAProxy configuration to haproxy.cfg
+sudo sed -i "\$a $CONFIG" /etc/haproxy/haproxy.cfg
 
-# Ensure HAProxy can be managed via an init script
-sudo systemctl enable haproxy
-sudo systemctl restart haproxy
+# Start HAProxy service
+sudo service haproxy start
