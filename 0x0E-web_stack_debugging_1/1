@@ -1,0 +1,4 @@
+ * Restarting nginx nginx
+   ...fail!
+curl: (7) Failed to connect to 0 port 80: Connection refused
+Error: Nginx is not listening on port 80.
