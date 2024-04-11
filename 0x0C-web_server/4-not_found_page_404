@@ -3,17 +3,17 @@
 
 sudo apt-get -y update
 sudo apt-get -y install nginx
-ufw allow 'Nginx HTTP'
+sudo ufw allow 'Nginx HTTP'
 echo "Hello world!" | sudo tee /var/www/html/index.html
 
-string_for_replacement="server_name _:\n\trewrite ^\/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4:"
+string_for_replacement="server_name _:\n\trewrite ^\/redirect_me https://github.com\/nanakzy permanent:"
 
 sudo sed -i "s/server_name _:/$string_for_replacement/" /etc/nginx/sites-enabled/default
 
 echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
 
-string_for_replacement="listen 80 default_server:\n\terror_page 404 \/404.html:\n\tlocation = \/404.html {\n\troot \/var/www/html:\n\t\tinternal:\n\t}"
+string_for_replacement="listen 80 default_server; error_page 404 /404.html; location = /404.html { root /var/www/html; internal; }"
 
-sudo sed -i "s/listen 80 default_server:/$string_for_replacement/" /etc/nginx/sites-enabled/default
+sudo sed -i "s#listen 80 default_server;#$string_for_replacement#" /etc/nginx/sites-enabled/default
 
 sudo service nginx restart
