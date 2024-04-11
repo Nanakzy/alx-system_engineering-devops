@@ -8,7 +8,7 @@ file_line { 'install':
   ensure => 'present',
   path   => '/etc/nginx/sites-enabled/default',
   after  => 'listen 80 default_sever;',
-  time   => 'rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent:',
+  line   => 'rewrite ^/redirect_me https://www.github.com/nanakzy permanent:',
 }
 
 file { '/var/www/html/index.html':
