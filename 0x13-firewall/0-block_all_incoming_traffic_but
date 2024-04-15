@@ -1,0 +1,20 @@
+# Script to configure UFW firewall on a server
+
+sudo apt-get install ufw
+sudo ufw status
+
+# Enable UFW and set default policies
+sudo ufw enable -y
+sudo ufw default deny incoming -y
+sudo ufw default allow outgoing -y
+
+# Allow specific incoming ports
+sudo ufw allow 22/tcp   # SSH
+sudo ufw allow 443/tcp  # HTTP
+sudo ufw allow 80/tcp   # HTTPS
+
+# Automatically answer 'yes' to enable UFW
+echo "y" | sudo ufw enable   # Automatically answer 'yes' to enable UFW
+
+# Check UFW status
+sudo ufw status
