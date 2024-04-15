@@ -1,6 +1,6 @@
 # Script to configure UFW firewall on a server
 
-sudo apt-get install ufw
+sudo apt-get install ufw -y
 sudo ufw status
 
 # Enable UFW and set default policies
@@ -15,6 +15,32 @@ sudo ufw allow 80/tcp   # HTTPS
 
 # Automatically answer 'yes' to enable UFW
 echo "y" | sudo ufw enable   # Automatically answer 'yes' to enable UFW
+
+# Check UFW status
+sudo ufw status
+
+# Check permissions for before.rules file
+ls -l /etc/ufw
+
+# Execute the before.rules script
+cd /etc/
+cd ufw
+sudo vi before.rules
+
+# Add nat rules to /etc/ufw/before.rules
+sudo sed -i '/ufw-before-forward/a *nat\n:PREROUTING ACCEPT [0:0]\n-A PREROUTING -p tcp --dport 8080 -j REDIRECT --to-port 80\nCOMMIT' /etc/ufw/before.rules
+
+# save and exit
+sudo sysctl -p
+
+# Additional configuration for IP forwarding
+ls /etc/default
+ls /etc | grep sysctl
+sudo sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/' /etc/sysctl.conf
+
+# save and exit
+
+sudo sysctl -p
 
 # Check UFW status
 sudo ufw status
