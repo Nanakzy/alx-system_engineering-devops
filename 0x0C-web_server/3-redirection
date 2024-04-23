@@ -1,19 +1,31 @@
 #!/usr/bin/env bash
-# configures an Nginx server so that /redirect_me is redirecting to another page
+#install ngix and have a file that returns the string "Hello World inside
 
 sudo apt-get update
-sudo apt-get -y install nginx
-sudo ufw allow 'Nginx HTTP'
-echo 'Hello World!' > /var/www/html/index.nginx-debian.html
-sudo chmod 644 /var/www/html/index.nginx-debian.html
+sudo apt-get install nginx -y
+echo "Hello World!" | sudo tee /usr/share/nginx/html/index.html
 
-# Define the redirection rule as a sed command
-redirection_rule="\
-location /redirect_me {
-    return 301 http://www.youtube.com/watch?v=QH2-TGUlwu4;
-}"
+new_config=\
+"server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
+               root /var/www/html;
+        index index.html index.htm index.nginx-debian.html;
+        server_name _;
+        location / {
+                try_files \$uri \$uri/ =404;
+        }
+        
+        if (\$request_filename ~ redirect_me){
+            rewrite ^ https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;
+        }
+}
+"
 
-# Use sed to insert the redirection rule after the default server_name line
-sudo sed -i "/server_name _;/a $redirection_rule" /etc/nginx/sites-enabled/default
-
-sudo service nginx restart
+echo "$new_config" > /etc/nginx/sites-available/default
+if [ "$(pgrep nginx)" -le 0 ];
+then
+    service nginx start
+else
+    service nginx restart
+fi;
