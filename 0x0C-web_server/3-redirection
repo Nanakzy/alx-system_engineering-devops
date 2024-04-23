@@ -6,7 +6,7 @@ sudo apt-get -y install nginx
 ufw allow 'Nginx HTTP'
 echo 'Hello World!' > /var/www/html/index.nginx-debian.html
 
-string_for_replacement="/server_name _;/n\rewrite ^/redirect_me http:\/\/www.youtube.com permanent;"
+string_for_replacement="/server_name _;/n\rewrite ^/redirect_me http:\/\/www.nanaky@github.com permanent;"
 
 sudo sed -i "s/server_name _:/$string_for_replacement/" /etc/nginx/sites-enabled/default
 
