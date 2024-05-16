@@ -2,7 +2,7 @@
 # SSH client configuration
 
 Host your_server_alias_or_IP
-    HostName 100.26.122.187
+    HostName 54.172.20.170
     ubuntu
     IdentityFile ~/.ssh/school
     PreferredAuthentications publickey
