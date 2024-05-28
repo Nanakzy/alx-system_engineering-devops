@@ -3,3 +3,5 @@
 sudo apt-get -y install nginx
 sed -i "s/8080/80/" /etc/nginx/sites-enabled/default
 sudo service nginx start
+sudo ufw allow 80/tcp
+sudo systemctl enable nginx
