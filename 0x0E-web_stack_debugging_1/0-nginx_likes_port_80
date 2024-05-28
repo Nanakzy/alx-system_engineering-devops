@@ -1,18 +1,5 @@
-#!/usr/bin/env bash                                                      
-
-# Fix Nginx configuration to listen on port 80
-sed -i '/listen\s*80;/!{s/listen[^;]*;/$&\n\tlisten 80;/}' /etc/nginx/sites-available/default
-
-# Restart Nginx service
-service nginx restart
-
-# Wait for Nginx to restart
-sleep 1
-
-# Check if Nginx is listening on port 80
-if ! curl -sSf 0:80 > /dev/null; then
-    echo "Error: Nginx is not listening on port 80."
-    exit 1
-fi
-
-echo "Nginx configuration fixed. Now listening on port 80."
+#!/usr/bin/env bash
+# Debug and configure nginx server to listen on port 80
+sudo apt-get -y install nginx
+sed -i "s/8080/80/" /etc/nginx/sites-enabled/default
+service nginx start

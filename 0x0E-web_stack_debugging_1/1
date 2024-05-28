@@ -1,4 +1,1 @@
- * Restarting nginx nginx
-   ...fail!
-curl: (7) Failed to connect to 0 port 80: Connection refused
-Error: Nginx is not listening on port 80.
+./0-nginx_likes_port_80: line 4: cd: /etc/nginx/sites-enabled/: No such file or directory
